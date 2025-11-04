@@ -1,8 +1,9 @@
-﻿namespace Week08Demo_Products;
+﻿using System;
+using System.Collections.Generic;
 
-class Program
+public class Program
 {
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
         List<Product> products = CreateProducts();
 
@@ -19,7 +20,7 @@ class Program
             Console.WriteLine("5. Exit");
             Console.Write("\nEnter your choice: ");
 
-            string choice = Console.ReadLine();
+            string choice = Console.ReadLine() ?? ""; // Handle null input with an empty string as default
 
             switch (choice)
             {
@@ -51,7 +52,7 @@ class Program
         }
     }
 
-    static List<Product> CreateProducts()
+    public static List<Product> CreateProducts()
     {
         List<Product> products = new List<Product>();
 
@@ -100,10 +101,10 @@ class Program
         return products;
     }
 
-    static void SearchById(List<Product> products)
+    public static void SearchById(List<Product> products)
     {
         Console.Write("\nEnter Product ID: ");
-        if (int.TryParse(Console.ReadLine(), out int id))
+        if (int.TryParse(Console.ReadLine(), out int id))  // Handle invalid input
         {
             List<Product> results = new List<Product>();
             foreach (Product product in products)
@@ -122,10 +123,10 @@ class Program
         }
     }
 
-    static void SearchByName(List<Product> products)
+    public static void SearchByName(List<Product> products)
     {
         Console.Write("\nEnter name to search: ");
-        string searchTerm = Console.ReadLine().ToLower();
+        string searchTerm = (Console.ReadLine() ?? "").ToLower(); // Handle null input with an empty string as default
 
         List<Product> results = new List<Product>();
         foreach (Product product in products)
@@ -140,10 +141,10 @@ class Program
         DisplayResults(results);
     }
 
-    static void SearchByDescription(List<Product> products)
+    public static void SearchByDescription(List<Product> products)
     {
         Console.Write("\nEnter description keyword to search: ");
-        string searchTerm = Console.ReadLine().ToLower();
+        string searchTerm = (Console.ReadLine() ?? "").ToLower(); // Handle null input with an empty string as default
 
         List<Product> results = new List<Product>();
         foreach (Product product in products)
@@ -159,7 +160,7 @@ class Program
         DisplayResults(results);
     }
 
-    static void DisplayAllProducts(List<Product> products)
+    public static void DisplayAllProducts(List<Product> products)
     {
         Console.WriteLine("\n=== All Products ===");
         foreach (Product product in products)
@@ -171,7 +172,7 @@ class Program
         Console.WriteLine($"Total products: {products.Count}");
     }
 
-    static void DisplayResults(List<Product> results)
+    public static void DisplayResults(List<Product> results)
     {
         if (results.Count == 0)
         {
@@ -189,10 +190,11 @@ class Program
         }
     }
 
-    static void PauseAndClear()
+    public static void PauseAndClear()
     {
-        Console.WriteLine("Press Enter to continue...");
-        Console.ReadLine();
+        Console.WriteLine();
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey(true);
         Console.Clear();
     }
 }
